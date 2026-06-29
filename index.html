@@ -155,6 +155,9 @@
 </head>
 <body>
 <div id="root"></div>
+<audio id="bgMusic" loop>
+  <source src="birthday-song.mp3" type="audio/mpeg">
+</audio>
 
 <script type="text/babel">
 const { useState, useRef, useMemo, useEffect } = React;
@@ -212,7 +215,8 @@ function BirthdayWish() {
   const ambientPetals = useMemo(() => makeAmbientPetals(10), []);
 
   const openGift = () => {
-    if (giftOpened) return;
+    if (giftOpened) return;const music = document.getElementById("bgMusic");
+music.play();
     setConfetti(makeConfetti(26));
     setGiftOpened(true);
     setTimeout(() => setShowBouquet(true), 500);
@@ -395,4 +399,5 @@ function BirthdayWish() {
 ReactDOM.createRoot(document.getElementById("root")).render(<BirthdayWish />);
 </script>
 </body>
-</html>
+  </html>
+  
