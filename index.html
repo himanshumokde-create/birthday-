@@ -36,9 +36,10 @@
   }
   .eyebrow { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #B07AA1; font-weight: 600; margin-bottom: 6px; }
   .name-input {
-    font-family: 'Caveat', cursive; font-size: 56px; font-weight: 700; color: #7A3E6E;
-    text-align: center; background: transparent; border: none; outline: none; width: 100%; line-height: 1.1;
-  }
+  font-family: 'Caveat', cursive; font-size: clamp(30px, 9vw, 56px); font-weight: 700; color: #7A3E6E;
+  text-align: center; background: transparent; border: none; outline: none; width: 100%; line-height: 1.15;
+  white-space: normal; word-wrap: break-word; overflow: hidden; resize: none; display: block; padding: 0;
+}
   .name-input.editing { border-bottom: 2px dashed #E3A8C9; }
   .tagline { font-size: 15px; color: #8B5E80; margin-top: 4px; margin-bottom: 36px; }
 
@@ -102,25 +103,25 @@
   }
 
   .message-card {
-    width: 100%; background: #FFFDFE; border-radius: 18px; padding: 22px 22px 18px;
-    box-shadow: 0 10px 30px rgba(170,110,150,0.12); border: 1px solid #F4DCEA;
+    width: 100%; background:linear-gradient(135deg, #fff8d6, #ffeef7) ; border-radius: 18px; padding: 22px 22px 18px;
+    box-shadow: 0 10px 30px rgba(170,110,150,0.12); border: 2px solid #FFD86B;
     transform: translateY(10px); opacity: 0; max-height: 0; overflow: hidden;
     transition: opacity 0.5s ease, transform 0.5s ease, max-height 0.5s ease, margin 0.5s ease; margin-bottom: 0;
   }
   .message-card.show { opacity: 1; transform: translateY(0); max-height: 600px; margin-bottom: 28px; }
   .message-text {
-    font-size: 15.5px; line-height: 1.65; color: #6B4565; width: 100%; background: transparent;
+    font-size: 15.5px; line-height: 1.65; color: #6B4565; font-weight: 700;width: 100%; background: transparent;
     border: none; outline: none; resize: none; font-family: 'Quicksand', sans-serif; text-align: left;
   }
   .message-text.editing { border: 1.5px dashed #E3A8C9; border-radius: 10px; padding: 8px; }
 
-  .photo-row { display: flex; gap: 10px; margin-bottom: 30px; justify-content: center; }
-  .polaroid { width: 120px; background: #fff; padding: 8px 8px 16px; border-radius: 4px; box-shadow: 0 6px 14px rgba(170,110,150,0.18); position: relative; }
+  .photo-row { display: flex; gap: 14px; margin-bottom: 30px; justify-content: center; }
+  .polaroid { width: 115px; background: #fff; padding: 8px 8px 16px; border-radius: 4px; box-shadow: 0 6px 14px rgba(170,110,150,0.18); position: relative; }
   .polaroid:nth-child(1) { transform: rotate(-6deg); }
   .polaroid:nth-child(2) { transform: rotate(3deg) translateY(6px); }
   .polaroid:nth-child(3) { transform: rotate(7deg); }
   .photo-slot {
-    width: 100%; height: 124px; border-radius: 2px; background: #FBEEF4; display: flex;
+    width: 100%; height: 115px; border-radius: 2px; background: #FBEEF4; display: flex;
     align-items: center; justify-content: center; cursor: pointer; overflow: hidden; color: #D497B8; font-size: 24px;
   }
   .photo-slot img { width: 100%; height: 100%; object-fit: cover; }
@@ -186,14 +187,212 @@ function makeConfetti(count) {
 function BirthdayWish() {
   // ---- EDIT YOUR DEFAULTS HERE ----
   const [editMode, setEditMode] = useState(false);
-  const [name, setName] = useState("Person A");
+  const [name, setName] = useState("Most Gorgeous Girl");
   const [message, setMessage] = useState(
-    "Happy birthday! Another year of your laugh, your little habits, and all the small things that make you, you. I'm so glad I get to know you. Here's to a year as good as you deserve \u2014 I hope today feels exactly that special."
+    "'MANY MANY HAPPY RETURNS OF THE DAY MY BABY 💕' Wishing you the most happiest birthday of your life. Hope you remain Happy and cheerful throughout this year. I'm so glad I get to have you. Here's to a year as good as you deserve \u2014 I hope today feels exactly that special.                             -Your Admirer (Also your Boyfriend😘)"
   );
   const [quote, setQuote] = useState(
     "Some people make the ordinary days feel warmer just by being in them. You're one of them."
   );
   // ---- END EDIT AREA ----
 
+  
   const [photos, setPhotos] = useState([
-    'data:image/jpeg;base64,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
+  "photo3.jpg",
+  "photo1.jpg",
+  "photo2.jpg"
+]);
+  const [giftOpened, setGiftOpened] = useState(false);
+  const [confetti, setConfetti] = useState([]);
+  const [showBouquet, setShowBouquet] = useState(false);
+  const [wordCount, setWordCount] = useState(0);
+
+  const fileInputRef = useRef(null);
+  const activeSlot = useRef(null);
+  const ambientPetals = useMemo(() => makeAmbientPetals(10), []);
+
+  const openGift = () => {
+    if (giftOpened) return;
+    setConfetti(makeConfetti(26));
+    setGiftOpened(true);
+    setTimeout(() => setShowBouquet(true), 500);
+    setTimeout(() => setShowBouquet(false), 2300);
+  };
+
+  useEffect(() => {
+    if (!giftOpened) return;
+    const words = message.trim().split(/\s+/);
+    const startDelay = setTimeout(() => {
+      let i = 0;
+      const interval = setInterval(() => {
+        i++;
+        setWordCount(i);
+        if (i >= words.length) clearInterval(interval);
+      }, 150);
+    }, 2200);
+    return () => clearTimeout(startDelay);
+  }, [giftOpened]);
+
+  const triggerUpload = (index) => {
+    activeSlot.current = index;
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      setPhotos((prev) => {
+        const next = [...prev];
+        next[activeSlot.current] = reader.result;
+        return next;
+      });
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
+  };
+
+  const removePhoto = (index) => {
+    setPhotos((prev) => {
+      const next = [...prev];
+      next[index] = null;
+      return next;
+    });
+  };
+
+  return (
+    <div className="page">
+      <div className="ambient">
+        {ambientPetals.map((p) => (
+          <span
+            key={p.id}
+            className="petal"
+            style={{
+              left: `${p.left}%`,
+              width: p.size,
+              height: p.size,
+              background: p.color,
+              animationDuration: `${p.duration}s`,
+              animationDelay: `${p.delay}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+      />
+
+      <div className="content">
+        <div className="eyebrow">a little something for</div>
+
+        <input
+          className={`name-input ${editMode ? "editing" : ""}`}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          readOnly={!editMode}
+        />
+        <div className="tagline"> Birthday Wishes</div>
+
+        <div className={`gift-wrap ${giftOpened ? "opened" : ""}`} onClick={openGift}>
+          {showBouquet && (
+            <div className="bouquet-pop">
+              <div className="bouquet-emoji">💐</div>
+              <div className="bouquet-caption">this is for you</div>
+            </div>
+          )}
+          <div className="confetti-layer">
+            {confetti.map((c) => (
+              <span
+                key={c.id}
+                className="confetti-piece"
+                style={{
+                  left: `${c.left}%`,
+                  background: c.color,
+                  animationDuration: `${c.duration}s`,
+                  animationDelay: `${c.delay}s`,
+                  "--drift": `${c.drift}px`,
+                  transform: `rotate(${c.rotate}deg)`,
+                }}
+              />
+            ))}
+          </div>
+          <div className="bow">🎀</div>
+          <div className="ribbon-h" />
+          <div className="lid" />
+          <div className="box-body">
+            <div className="ribbon-v" />
+          </div>
+        </div>
+        <div className="gift-hint">{giftOpened ? "" : "tap the gift to open it"}</div>
+
+        <div className={`message-card ${giftOpened ? "show" : ""}`}>
+          {editMode ? (
+            <textarea
+              className="message-text editing"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              rows={5}
+            />
+          ) : (
+            <p className="message-text">
+              {message.trim().split(/\s+/).slice(0, wordCount).join(" ")}
+            </p>
+          )}
+        </div>
+
+        <div className="photo-row">
+          {photos.map((src, i) => (
+            <div className="polaroid" key={i}>
+              <div className="photo-slot" onClick={() => triggerUpload(i)}>
+                {src ? <img src={src} alt="" /> : "📷"}
+              </div>
+              {src && editMode && (
+                <div
+                  className="remove-photo"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removePhoto(i);
+                  }}
+                >
+                  ✕
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="quote-card">
+          <div className="quote-icon">❤️</div>
+          <textarea
+            className={`quote-text ${editMode ? "editing" : ""}`}
+            value={quote}
+            onChange={(e) => setQuote(e.target.value)}
+            readOnly={!editMode}
+            rows={2}
+          />
+        </div>
+
+        <div className="footer-note">made with ❤️ for My Favourite</div>
+      </div>
+
+      <button
+        className="edit-toggle"
+        onClick={() => setEditMode((v) => !v)}
+        title={editMode ? "Done editing" : "Edit this page"}
+      >
+        {editMode ? "✓" : "✏️"}
+      </button>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<BirthdayWish />);
+</script>
+</body>
+</html>
